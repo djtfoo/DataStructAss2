@@ -6,6 +6,8 @@
 #include <stack>
 #include <queue>
 
+#include <algorithm>
+
 using std::string;
 using std::vector;
 using std::list;
@@ -45,6 +47,7 @@ using std::queue;
              }
          }
      }
+
      if (!openbrackets.empty()) {   //some brackets in string are not closed -- string is "incomplete"
          return false;
      }
@@ -55,5 +58,31 @@ using std::queue;
 // Query machine, hits
 void QueryMachine(vector<int>& data, vector<int>& queries, vector<unsigned int>& results)
 {
-    
+    /*//populate results vector
+    for (vector<int>::iterator it = queries.begin(); it != queries.end(); ++it) {
+        results.push_back(0);
+    }
+
+    size_t size_queries = queries.size();
+
+    for (vector<int>::iterator it = data.begin(); it != data.end(); ++it) {
+        for (size_t i = 0; i < size_queries; ++i) {
+            if (*it == queries[i]) {
+                ++results[i];
+            }
+        }
+    }
+
+    for (vector<int>::iterator i = queries.begin(); i != queries.end(); ++i) {
+        unsigned int count = 0;
+        vector<int>::iterator it = data.begin();
+        while (it != data.end()) {
+            it = find(it, data.end(), *i);
+            if (it != data.end()) {
+                ++count;
+                ++it;
+            }
+        }
+        results.push_back(count);
+    }*/
 }
