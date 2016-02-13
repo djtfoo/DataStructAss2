@@ -54,58 +54,58 @@ using std::queue;
 }
 
 // Query machine, hits
-void QueryMachine(vector<int>& data, vector<int>& queries, vector<unsigned int>& results)
-{
-    /*//vector method 1
-    for (vector<int>::iterator it = queries.begin(); it != queries.end(); ++it) {
-        results.push_back(0);
-    }
+ void QueryMachine(vector<int>& data, vector<int>& queries, vector<unsigned int>& results)
+ {
+     /*//vector method 1
+     for (vector<int>::iterator it = queries.begin(); it != queries.end(); ++it) {
+     results.push_back(0);
+     }
 
-    size_t size_queries = queries.size();
+     size_t size_queries = queries.size();
 
-    for (vector<int>::iterator it = data.begin(); it != data.end(); ++it) {
-        for (size_t i = 0; i < size_queries; ++i) {
-            if (*it == queries[i]) {
-                ++results[i];
-            }
-        }
-    }*/
+     for (vector<int>::iterator it = data.begin(); it != data.end(); ++it) {
+     for (size_t i = 0; i < size_queries; ++i) {
+     if (*it == queries[i]) {
+     ++results[i];
+     }
+     }
+     }*/
 
-    /*//vector method 2
-    for (vector<int>::iterator i = queries.begin(); i != queries.end(); ++i) {
-        unsigned int count = 0;
-        vector<int>::iterator it = data.begin();
-        while (it != data.end()) {
-            it = find(it, data.end(), *i);
-            if (it != data.end()) {
-                ++count;
-                ++it;
-            }
-        }
-        results.push_back(count);
-    }*/
+     /*//vector method 2
+     for (vector<int>::iterator i = queries.begin(); i != queries.end(); ++i) {
+     unsigned int count = 0;
+     vector<int>::iterator it = data.begin();
+     while (it != data.end()) {
+     it = find(it, data.end(), *i);
+     if (it != data.end()) {
+     ++count;
+     ++it;
+     }
+     }
+     results.push_back(count);
+     }*/
 
-    /*//vector method 3
-    for (vector<int>::iterator it = queries.begin(); it != queries.end(); ++it) {
-        results.push_back(std::count(data.begin(), data.end(), *it));
-    }*/
+     /*//vector method 3
+     for (vector<int>::iterator it = queries.begin(); it != queries.end(); ++it) {
+     results.push_back(std::count(data.begin(), data.end(), *it));
+     }*/
 
-    map<int, unsigned int> storedata;
-    map<int, unsigned int>::iterator itmap = storedata.begin();
+     map<int, unsigned int> storedata;
+     map<int, unsigned int>::iterator itmap = storedata.begin();
 
-    for (vector<int>::iterator it = data.begin(); it != data.end(); ++it) {
-        itmap = storedata.find(*it);
-        if (itmap != storedata.end()) {     //data exists already
-            ++itmap->second;
-        }
-        else {      //create a new key
-            storedata.insert(std::pair<int, int>(*it, 1));
-        }
-    }
+     for (vector<int>::iterator it = queries.begin(); it != queries.end(); ++it) {
+         storedata.insert(std::pair<int, int>(*it, 0));
+     }
 
-    for (vector<int>::iterator it = queries.begin(); it != queries.end(); ++it) {
-        itmap = storedata.find(*it);
-        unsigned int count = storedata[*it];
-        results.push_back(count);
-    }
-}
+     for (vector<int>::iterator it = data.begin(); it != data.end(); ++it) {
+         itmap = storedata.find(*it);
+         if (itmap != storedata.end()) {     //data exists already
+             ++itmap->second;
+         }
+     }
+
+     for (vector<int>::iterator it = queries.begin(); it != queries.end(); ++it) {
+         itmap = storedata.find(*it);
+         results.push_back(itmap->second);
+     }
+ }
