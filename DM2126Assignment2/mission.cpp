@@ -58,7 +58,7 @@ using std::queue;
 // Query machine, hits
 void QueryMachine(vector<int>& data, vector<int>& queries, vector<unsigned int>& results)
 {
-    /*//populate results vector
+    /*//vector method 1
     for (vector<int>::iterator it = queries.begin(); it != queries.end(); ++it) {
         results.push_back(0);
     }
@@ -71,8 +71,9 @@ void QueryMachine(vector<int>& data, vector<int>& queries, vector<unsigned int>&
                 ++results[i];
             }
         }
-    }
+    }*/
 
+    /*//vector method 2
     for (vector<int>::iterator i = queries.begin(); i != queries.end(); ++i) {
         unsigned int count = 0;
         vector<int>::iterator it = data.begin();
@@ -85,4 +86,13 @@ void QueryMachine(vector<int>& data, vector<int>& queries, vector<unsigned int>&
         }
         results.push_back(count);
     }*/
+
+    /*//vector method 3
+    for (vector<int>::iterator it = queries.begin(); it != queries.end(); ++it) {
+        results.push_back(std::count(data.begin(), data.end(), *it));
+    }*/
+
+    map<int, int> storedata;
+    
+
 }
