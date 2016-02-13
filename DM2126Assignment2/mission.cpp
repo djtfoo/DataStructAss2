@@ -6,8 +6,6 @@
 #include <stack>
 #include <queue>
 
-#include <algorithm>
-
 using std::string;
 using std::vector;
 using std::list;
@@ -92,7 +90,22 @@ void QueryMachine(vector<int>& data, vector<int>& queries, vector<unsigned int>&
         results.push_back(std::count(data.begin(), data.end(), *it));
     }*/
 
-    map<int, int> storedata;
-    
+    map<int, unsigned int> storedata;
+    map<int, unsigned int>::iterator itmap = storedata.begin();
 
+    for (vector<int>::iterator it = data.begin(); it != data.end(); ++it) {
+        itmap = storedata.find(*it);
+        if (itmap != storedata.end()) {     //data exists already
+            ++itmap->second;
+        }
+        else {      //create a new key
+            storedata.insert(std::pair<int, int>(*it, 1));
+        }
+    }
+
+    for (vector<int>::iterator it = queries.begin(); it != queries.end(); ++it) {
+        itmap = storedata.find(*it);
+        unsigned int count = storedata[*it];
+        results.push_back(count);
+    }
 }
