@@ -45,6 +45,9 @@ using std::queue;
              }
          }
      }
+     if (!openbrackets.empty()) {   //some brackets in string are not closed -- string is "incomplete"
+         return false;
+     }
 
      return true;
 }
